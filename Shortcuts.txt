@@ -1,0 +1,10 @@
+Shift   Alt   ->
+
+=======================================================================================
+
+
+Function                    Shortcut
+
+Select between Tags         Shift + alt + ArrowRight
+Duplicate                   Shitf + Alt + ArrowDown
+Rename                      F2         
