@@ -1,14 +1,16 @@
 import { grey } from "@mui/material/colors";
-import { EASY_SELECT, GeneralRecipeData } from "./GeneralRecipeDataForm";
+import { EASY_SELECT, GeneralRecipeData } from "./GeneralForm";
 import { useState } from "react";
 import { Box, Step, StepLabel, Stepper } from "@mui/material";
-import WizardPage from "./WizardPage";
-import GeneralRecipeDataPage from "./GeneralRecipeDataPage";
+import GeneralPage from "./GeneralPage";
 import IngredientPage, { Ingredient } from "./IngredientPage";
+import InstructionPage from "./InstructionPage";
+import { Instruction } from "./InstructionInput";
 
 type Recipe = {
   generalRecipeData: GeneralRecipeData;
   ingredients: Ingredient[];
+  instructions: Instruction[]
 };
 
 export default function AddRecipeWizard() {
@@ -20,12 +22,21 @@ export default function AddRecipeWizard() {
       difficulty: EASY_SELECT,
     },
     ingredients: [],
+    instructions: []
   });
 
   const [currentStep, setCurrentStep] = useState<number>(0);
 
   function changeGeneralRecipeData(data: GeneralRecipeData) {
     setRecipeState((prev) => ({ ...prev, generalRecipeData: data }));
+  }
+
+  function changeIngredients(ingredients: Ingredient[]): void {
+    setRecipeState((prev) => ({ ...prev, ingredients: ingredients }));
+  }
+
+  function changeInstructions(instructions: Instruction[]): void {
+    setRecipeState((prev) => ({ ...prev, instructions: instructions }));
   }
 
   const steps = ["General", "Ingredients", "Instructions"];
@@ -42,9 +53,7 @@ export default function AddRecipeWizard() {
     }
   }
 
-  function changeIngredients(ingredients: Ingredient[]): void {
-    setRecipeState((prev) => ({ ...prev, ingredients: ingredients }));
-  }
+  
 
   return (
     <Box
@@ -70,7 +79,7 @@ export default function AddRecipeWizard() {
       </Stepper>
       <Box display={"flex"} flexDirection={"column"} flexGrow={1} sx={{ overflowY: "auto" }}>
         {currentStep === 0 && (
-          <GeneralRecipeDataPage
+          <GeneralPage
             changeGeneralRecipeData={changeGeneralRecipeData}
             generalRecipeData={recipe.generalRecipeData}
             onNextPage={goNext}
@@ -86,7 +95,12 @@ export default function AddRecipeWizard() {
           ></IngredientPage>
         )}
         {currentStep === 2 && (
-          <WizardPage title="" onNextPage={goNext} onPreviousPage={goPrevious} />
+          <InstructionPage
+            changeInstructions={changeInstructions}
+            instructions={recipe.instructions}
+            onNextPage={goNext}
+            onPreviousPage={goPrevious}
+          ></InstructionPage>
         )}
       </Box>
     </Box>

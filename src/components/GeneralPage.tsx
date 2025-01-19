@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GeneralRecipeData, GeneralRecipeDataForm } from "./GeneralRecipeDataForm";
+import { GeneralRecipeData, GeneralForm } from "./GeneralForm";
 import WizardPage, { PageProps } from "./WizardPage";
 
 
@@ -22,7 +22,7 @@ type Props = PageProps & {
   changeGeneralRecipeData: (data: GeneralRecipeData) => void;
 };
 
-function GeneralRecipeDataPage({
+function GeneralPage({
   onNextPage: onNextPageParent,
   onPreviousPage: onPreviousPageParent,
   generalRecipeData,
@@ -81,7 +81,7 @@ function GeneralRecipeDataPage({
         onNextPage={onNextPage}
         onPreviousPage={onPreviousPage}
       >
-        <GeneralRecipeDataForm
+        <GeneralForm
           generalRecipeData={generalRecipeDataLocal}
           generalRecipeErrors={generalRecipeErrors}
           setGeneralRecipeData={setGeneralRecipeData}
@@ -91,4 +91,4 @@ function GeneralRecipeDataPage({
   );
 }
 
-export default GeneralRecipeDataPage;
+export default GeneralPage;

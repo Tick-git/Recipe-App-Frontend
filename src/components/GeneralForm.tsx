@@ -1,6 +1,6 @@
 import { Box, TextField } from "@mui/material";
 import { ChangeEvent } from "react";
-import { GeneralRecipeFormErrors } from "./GeneralRecipeDataPage";
+import { GeneralRecipeFormErrors } from "./GeneralPage";
 
 type GeneralRecipeDataFormProps = {
   setGeneralRecipeData: React.Dispatch<React.SetStateAction<GeneralRecipeData>>;
@@ -17,7 +17,7 @@ export type GeneralRecipeData = {
 
 export const EASY_SELECT: string = "easy";
 
-export function GeneralRecipeDataForm({
+export function GeneralForm({
   setGeneralRecipeData: setGeneralRecipeData,
   generalRecipeData,
   generalRecipeErrors,
