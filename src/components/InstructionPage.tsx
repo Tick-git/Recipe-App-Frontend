@@ -10,18 +10,21 @@ type Props = PageProps & {
 };
 
 function InstructionPage({
-    onNextPage: onNextPageParent,
-    onPreviousPage: onPreviousPageParent,
-    instructions
+  onNextPage: onNextPageParent,
+  onPreviousPage: onPreviousPageParent,
+  changeInstructions,
+  instructions,
 }: Props) {
   const [localInstructions, setInstructions] = useState<Instruction[]>(instructions);
 
   function onNextPage() {
+    changeInstructions(localInstructions);
     onNextPageParent();
   }
 
   function onPreviousPage() {
     if (onPreviousPageParent) {
+      changeInstructions(localInstructions);
       onPreviousPageParent();
     }
   }
@@ -56,7 +59,10 @@ function InstructionPage({
   return (
     <WizardPage title="Instructions" onNextPage={onNextPage} onPreviousPage={onPreviousPage}>
       <WizardListBox>
-        <InstructionInput step={localInstructions.length + 1} addNewInstruction={addNewInstruction} />
+        <InstructionInput
+          step={localInstructions.length + 1}
+          addNewInstruction={addNewInstruction}
+        />
         {RenderAddedInstructions()}
       </WizardListBox>
     </WizardPage>
