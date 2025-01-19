@@ -1,11 +1,11 @@
 import { Box, TextField } from "@mui/material";
 import { ChangeEvent } from "react";
-import { GeneralRecipeErrors } from "./GeneralRecipeDataPage";
+import { GeneralRecipeFormErrors } from "./GeneralRecipeDataPage";
 
 type GeneralRecipeDataFormProps = {
   setGeneralRecipeData: React.Dispatch<React.SetStateAction<GeneralRecipeData>>;
   generalRecipeData: GeneralRecipeData;
-  generalRecipeErrors: GeneralRecipeErrors;
+  generalRecipeErrors: GeneralRecipeFormErrors;
 };
 
 export type GeneralRecipeData = {

@@ -4,9 +4,11 @@ import { useState } from "react";
 import { Box, Step, StepLabel, Stepper } from "@mui/material";
 import WizardPage from "./WizardPage";
 import GeneralRecipeDataPage from "./GeneralRecipeDataPage";
+import IngredientPage, { Ingredient } from "./IngredientPage";
 
 type Recipe = {
   generalRecipeData: GeneralRecipeData;
+  ingredients: Ingredient[];
 };
 
 export default function AddRecipeWizard() {
@@ -17,11 +19,12 @@ export default function AddRecipeWizard() {
       time: "",
       difficulty: EASY_SELECT,
     },
+    ingredients: [],
   });
 
   const [currentStep, setCurrentStep] = useState<number>(0);
 
-  function ChangeGeneralRecipeData(data: GeneralRecipeData) {
+  function changeGeneralRecipeData(data: GeneralRecipeData) {
     setRecipeState((prev) => ({ ...prev, generalRecipeData: data }));
   }
 
@@ -37,6 +40,10 @@ export default function AddRecipeWizard() {
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
     }
+  }
+
+  function changeIngredients(ingredients: Ingredient[]): void {
+    setRecipeState((prev) => ({ ...prev, ingredients: ingredients }));
   }
 
   return (
@@ -61,19 +68,25 @@ export default function AddRecipeWizard() {
           </Step>
         ))}
       </Stepper>
-      <Box display={"flex"} flexDirection={"column"} flexGrow={1} sx={{overflowY: "auto",}}>
+      <Box display={"flex"} flexDirection={"column"} flexGrow={1} sx={{ overflowY: "auto" }}>
         {currentStep === 0 && (
           <GeneralRecipeDataPage
-            changeGeneralRecipeData={ChangeGeneralRecipeData}
+            changeGeneralRecipeData={changeGeneralRecipeData}
             generalRecipeData={recipe.generalRecipeData}
-            pageProps={{ onNextPage: goNext, onPreviousPage: undefined, title: "General" }}
+            onNextPage={goNext}
+            onPreviousPage={undefined}
           />
         )}
         {currentStep === 1 && (
-          <WizardPage title="" backgroundColor="blue" next={goNext} previous={goPrevious} />
+          <IngredientPage
+            changeIngredients={changeIngredients}
+            ingredients={recipe.ingredients}
+            onNextPage={goNext}
+            onPreviousPage={goPrevious}
+          ></IngredientPage>
         )}
         {currentStep === 2 && (
-          <WizardPage title="" backgroundColor="yellow" next={goNext} previous={goPrevious} />
+          <WizardPage title="" onNextPage={goNext} onPreviousPage={goPrevious} />
         )}
       </Box>
     </Box>

@@ -1,45 +1,42 @@
 import { useState } from "react";
 import { GeneralRecipeData, GeneralRecipeDataForm } from "./GeneralRecipeDataForm";
-import WizardPage from "./WizardPage";
+import WizardPage, { PageProps } from "./WizardPage";
 
-export type PageProps = {
-  onNextPage: () => void;
-  onPreviousPage?: () => void;
-  title: string;
-};
 
-export type GeneralRecipeErrors = {
+export type GeneralRecipeFormErrors = {
   name: { hasError: boolean; message: string };
   author: { hasError: boolean; message: string };
   time: { hasError: boolean; message: string };
 };
 
-type GeneralRecipeDataPageProps = {
-  pageProps: PageProps;
+function getDefaultGeneralRecipeErrors(): GeneralRecipeFormErrors {
+  return {
+    name: { hasError: false, message: "" },
+    author: { hasError: false, message: "" },
+    time: { hasError: false, message: "" },
+  };
+}
+
+type Props = PageProps & {
   generalRecipeData: GeneralRecipeData;
   changeGeneralRecipeData: (data: GeneralRecipeData) => void;
 };
 
 function GeneralRecipeDataPage({
-  pageProps: { onNextPage, onPreviousPage, title },
+  onNextPage: onNextPageParent,
+  onPreviousPage: onPreviousPageParent,
   generalRecipeData,
   changeGeneralRecipeData,
-}: GeneralRecipeDataPageProps) {
+}: Props) {
   const [generalRecipeDataLocal, setGeneralRecipeData] =
     useState<GeneralRecipeData>(generalRecipeData);
 
-  const [generalRecipeErrors, setGeneralRecipeErrors] = useState<GeneralRecipeErrors>({
-    name: { hasError: false, message: "" },
-    author: { hasError: false, message: "" },
-    time: { hasError: false, message: "" },
-  });
+  const [generalRecipeErrors, setGeneralRecipeErrors] = useState<GeneralRecipeFormErrors>(
+    getDefaultGeneralRecipeErrors()
+  );
 
-  function generalRecipeDataisValid(data: GeneralRecipeData): boolean {
-    const errors: GeneralRecipeErrors = {
-      name: { hasError: false, message: "" },
-      author: { hasError: false, message: "" },
-      time: { hasError: false, message: "" },
-    };
+  function dataIsValid(data: GeneralRecipeData): boolean {
+    const errors: GeneralRecipeFormErrors = getDefaultGeneralRecipeErrors();
 
     if (data.name === "") {
       errors.name = { hasError: true, message: "Name is required" };
@@ -63,19 +60,27 @@ function GeneralRecipeDataPage({
     );
   }
 
-  function onSubmit() {
-    if (!generalRecipeDataisValid(generalRecipeDataLocal)) {
-      return;
+  function onNextPage() {
+    if (dataIsValid(generalRecipeDataLocal)) {
+      changeGeneralRecipeData(generalRecipeDataLocal);
+      onNextPageParent();
     }
+  }
 
-    changeGeneralRecipeData(generalRecipeDataLocal);
-
-    onNextPage();
+  function onPreviousPage() {
+    if (onPreviousPageParent) {
+      changeGeneralRecipeData(generalRecipeDataLocal);
+      onPreviousPageParent();
+    }
   }
 
   return (
     <>
-      <WizardPage title={title} backgroundColor="white" next={onSubmit} previous={onPreviousPage}>
+      <WizardPage
+        title={"General"}
+        onNextPage={onNextPage}
+        onPreviousPage={onPreviousPage}
+      >
         <GeneralRecipeDataForm
           generalRecipeData={generalRecipeDataLocal}
           generalRecipeErrors={generalRecipeErrors}

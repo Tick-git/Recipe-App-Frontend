@@ -1,16 +1,18 @@
 import { Box, Button, Typography } from "@mui/material";
 
-type TestWizardSiteProps = {
-  backgroundColor: string;
-  next: () => void;
-  previous?: () => void;
+export type PageProps = {
+  onNextPage: () => void;
+  onPreviousPage?: () => void;
+};
+
+type Props = PageProps & {
   children?: React.ReactNode;
   title: string;
 };
 
-function WizardPage({ backgroundColor, next, previous, children, title }: TestWizardSiteProps) {
+function WizardPage({ onNextPage, onPreviousPage, children, title }: Props) {
   return (
-    <Box sx={{ height: "100%", width: "100%", backgroundColor: backgroundColor }}>
+    <Box sx={{ height: "100%", width: "100%" }}>
       <Box alignItems={"center"} height={"10%"} display={"flex"} sx={{ paddingY: "2.5rem" }}>
         <Typography variant="h4">{title}</Typography>
       </Box>
@@ -23,15 +25,20 @@ function WizardPage({ backgroundColor, next, previous, children, title }: TestWi
       >
         {children}
       </Box>
-      <Box justifyContent={"space-between"} display={"flex"}>
-        {previous ? (
-          <Button variant="outlined" size="medium" onClick={previous} sx={{ minWidth: "7rem" }}>
+      <Box justifyContent={"space-between"} display={"flex"} sx={{marginTop: "1rem"}}>
+        {onPreviousPage ? (
+          <Button
+            variant="outlined"
+            size="medium"
+            onClick={onPreviousPage}
+            sx={{ minWidth: "7rem" }}
+          >
             Previous
           </Button>
         ) : (
           <div></div>
         )}
-        <Button variant="contained" onClick={next} sx={{ minWidth: "7rem" }}>
+        <Button variant="contained" onClick={onNextPage} sx={{ minWidth: "7rem" }}>
           Next
         </Button>
       </Box>
