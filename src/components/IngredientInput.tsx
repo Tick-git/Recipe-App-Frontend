@@ -1,43 +1,40 @@
-import { Box, Button, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { Ingredient } from "../types/types";
 import { ChangeEvent, useState } from "react";
 import { GRAMM_UNIT } from "../constants/constants";
 import { ingredientUtil } from "../util/util";
+import WizardListElement from "./WizardListElement";
 
 type Props = {
   addNewIngredient: (ingredient: Ingredient) => void;
 };
 
 function IngredientInput({ addNewIngredient }: Props) {
-  const [ingredientLocal, setIngredientLocal] = useState<Ingredient>(
-    ingredientUtil.defaultIngredient()
-  );
+  const [ingredientLocal, setIngredient] = useState<Ingredient>(ingredientUtil.defaultIngredient());
 
   function onInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
     const { name, value } = event.target;
-    setIngredientLocal((prev) => ({ ...prev, [name]: value }));
+    setIngredient((prev) => ({ ...prev, [name]: value }));
   }
 
   function onAddIngredientClicked(): void {
-    setIngredientLocal(ingredientUtil.defaultIngredient());
+    setIngredient(ingredientUtil.defaultIngredient());
     addNewIngredient(ingredientLocal);
   }
 
   return (
-    <Box display={"flex"} flexDirection={"row"} gap={1}>
+    <WizardListElement buttonText="Add" onClick={onAddIngredientClicked} buttonColor="primary">
       <TextField
         onChange={onInputChange}
         value={ingredientLocal.name}
         name="name"
         label="Name"
         size="small"
-        variant="outlined"
         sx={{ flex: 3 }}
       />
       <TextField
         label="Amount"
         size="small"
-        variant="outlined"
         sx={{ flex: 2 }}
         onChange={onInputChange}
         value={ingredientLocal.amount}
@@ -48,7 +45,6 @@ function IngredientInput({ addNewIngredient }: Props) {
         label="Unit"
         onChange={onInputChange}
         name="unit"
-        variant="outlined"
         size="small"
         value={ingredientLocal.unit}
         sx={{ flex: 1 }}
@@ -63,15 +59,7 @@ function IngredientInput({ addNewIngredient }: Props) {
         <option value="ml">ml</option>
         <option value="l">l</option>
       </TextField>
-      <Button
-        onClick={onAddIngredientClicked}
-        variant="contained"
-        color="primary"
-        sx={{ flex: 0.2 }}
-      >
-        Add
-      </Button>
-    </Box>
+    </WizardListElement>
   );
 }
 

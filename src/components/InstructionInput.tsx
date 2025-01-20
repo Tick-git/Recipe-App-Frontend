@@ -1,6 +1,7 @@
-import { Box, Button, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { useState } from "react";
 import { Instruction } from "../types/types";
+import WizardListElement from "./WizardListElement";
 
 type Props = {
   addNewInstruction: (instruction: Instruction) => void;
@@ -16,26 +17,18 @@ function InstructionInput({ addNewInstruction, step }: Props) {
   }
 
   return (
-    <Box display={"flex"} flexDirection={"row"} gap={1}>
+    <WizardListElement buttonText="Add" onClick={onAddNewInstructionClicked} buttonColor="primary">
       <TextField
         name="instruction"
         label={`Step ${step}`}
-        variant="outlined"
         value={instruction}
         multiline
         rows={3}
         onChange={(event) => setInstruction(event.target.value)}
         sx={{ flex: 3 }}
+        slotProps={{ inputLabel: { shrink: true } }}
       />
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={onAddNewInstructionClicked}
-        sx={{ flex: 0.2 }}
-      >
-        Add
-      </Button>
-    </Box>
+    </WizardListElement>
   );
 }
 

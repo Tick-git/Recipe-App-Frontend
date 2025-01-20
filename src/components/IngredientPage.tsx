@@ -25,10 +25,9 @@ function IngredientPage({
   }
 
   function onPreviousPage() {
-    changeIngredients(ingredientsLocal);
-
     if (onPreviousPageParent) {
       onPreviousPageParent();
+      changeIngredients(ingredientsLocal);
     }
   }
 

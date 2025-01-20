@@ -1,5 +1,6 @@
-import { Box, Button, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { Instruction } from "../types/types";
+import WizardListElement from "./WizardListElement";
 
 type Props = {
   instruction: Instruction;
@@ -12,26 +13,18 @@ function InstructionDisplay({ instruction, deleteInstruction }: Props) {
   }
 
   return (
-    <Box display={"flex"} flexDirection={"row"} gap={1}>
+    <WizardListElement buttonText="X" onClick={onDeleteInstructionClicked} buttonColor="error">
       <TextField
         name="instruction"
         label={`Step ${instruction.step}`}
-        variant="outlined"
         value={instruction.text}
         multiline
         disabled
         rows={3}
         sx={{ flex: 3 }}
+        slotProps={{ inputLabel: { shrink: true } }}
       />
-      <Button
-        variant="contained"
-        onClick={onDeleteInstructionClicked}
-        color="error"
-        sx={{ flex: 0.2 }}
-      >
-        X
-      </Button>
-    </Box>
+    </WizardListElement>
   );
 }
 

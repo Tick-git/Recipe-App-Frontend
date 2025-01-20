@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { GeneralRecipeData, GeneralRecipeFormErrors } from "../types/types";
 import WizardPage from "./WizardPage";
-import { PageProps } from "../types/types";
+import { GeneralRecipeData, PageProps } from "../types/types";
 import GeneralForm from "./GeneralForm";
-import { generalRecipeFormErrorsUtil } from "../util/util";
+import useGeneralRecipeValidation from "../hooks/useGeneralRecipeValidation";
 
 type Props = PageProps & {
   generalRecipeData: GeneralRecipeData;
@@ -19,33 +18,7 @@ function GeneralPage({
   const [generalRecipeDataLocal, setGeneralRecipeData] =
     useState<GeneralRecipeData>(generalRecipeData);
 
-  const [generalRecipeErrors, setGeneralRecipeErrors] = useState<GeneralRecipeFormErrors>(
-    generalRecipeFormErrorsUtil.getDefaultObject()
-  );
-
-  function dataIsValid(data: GeneralRecipeData): boolean {
-    const errors: GeneralRecipeFormErrors = generalRecipeFormErrorsUtil.getDefaultObject();
-
-    if (data.name === "") {
-      errors.name = { hasError: true, message: "Name is required" };
-    }
-
-    if (data.author === "") {
-      errors.author = { hasError: true, message: "Author is required" };
-    }
-
-    if (data.time === "") {
-      errors.time = { hasError: true, message: "Time is required" };
-    }
-
-    setGeneralRecipeErrors(errors);
-
-    return (
-      errors.name.hasError === false &&
-      errors.author.hasError === false &&
-      errors.time.hasError === false
-    );
-  }
+  const { generalRecipeErrors, dataIsValid } = useGeneralRecipeValidation();
 
   function onNextPage() {
     if (dataIsValid(generalRecipeDataLocal)) {
