@@ -1,7 +1,9 @@
 import { useState } from "react";
 import WizardListBox from "./WizardListBox";
-import WizardPage, { PageProps } from "./WizardPage";
-import InstructionInput, { Instruction } from "./InstructionInput";
+import WizardPage from "./WizardPage";
+import { PageProps } from "../types/types";
+import InstructionInput from "./InstructionInput";
+import { Instruction } from "../types/types";
 import InstructionDisplay from "./InstructionDisplay";
 
 type Props = PageProps & {

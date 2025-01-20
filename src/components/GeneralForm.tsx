@@ -1,27 +1,20 @@
 import { Box, TextField } from "@mui/material";
 import { ChangeEvent } from "react";
-import { GeneralRecipeFormErrors } from "./GeneralPage";
+import { GeneralRecipeFormErrors } from "../types/types";
+import { GeneralRecipeData } from "../types/types";
+import { EASY_SELECT } from "../constants/constants";
 
-type GeneralRecipeDataFormProps = {
+type Props = {
   setGeneralRecipeData: React.Dispatch<React.SetStateAction<GeneralRecipeData>>;
   generalRecipeData: GeneralRecipeData;
   generalRecipeErrors: GeneralRecipeFormErrors;
 };
 
-export type GeneralRecipeData = {
-  name: string;
-  author: string;
-  time: string;
-  difficulty: string;
-};
-
-export const EASY_SELECT: string = "easy";
-
-export function GeneralForm({
+function GeneralForm({
   setGeneralRecipeData: setGeneralRecipeData,
   generalRecipeData,
   generalRecipeErrors,
-}: GeneralRecipeDataFormProps) {
+}: Props) {
   function onInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
     const { name, value } = event.target;
     setGeneralRecipeData((prev) => ({ ...prev, [name]: value }));
@@ -34,7 +27,7 @@ export function GeneralForm({
         flexDirection: "column",
         gap: 5,
         height: "100%",
-        overflow: "visible"
+        overflow: "visible",
       }}
     >
       <TextField
@@ -46,7 +39,7 @@ export function GeneralForm({
         error={generalRecipeErrors.name.hasError}
         helperText={generalRecipeErrors.name.message}
         slotProps={{ formHelperText: { sx: { position: "absolute", bottom: -20 } } }}
-        />
+      />
       <TextField
         label="Author"
         variant="outlined"
@@ -56,7 +49,7 @@ export function GeneralForm({
         error={generalRecipeErrors.author.hasError}
         helperText={generalRecipeErrors.author.message}
         slotProps={{ formHelperText: { sx: { position: "absolute", bottom: -20 } } }}
-        />
+      />
       <TextField
         label="Time"
         variant="outlined"
@@ -66,7 +59,7 @@ export function GeneralForm({
         error={generalRecipeErrors.time.hasError}
         helperText={generalRecipeErrors.time.message}
         slotProps={{ formHelperText: { sx: { position: "absolute", bottom: -20 } } }}
-        />
+      />
       <TextField
         select
         label="Difficulty"
@@ -87,3 +80,5 @@ export function GeneralForm({
     </Box>
   );
 }
+
+export default GeneralForm;

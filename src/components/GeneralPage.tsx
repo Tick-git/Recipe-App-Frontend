@@ -1,21 +1,9 @@
 import { useState } from "react";
-import { GeneralRecipeData, GeneralForm } from "./GeneralForm";
-import WizardPage, { PageProps } from "./WizardPage";
-
-
-export type GeneralRecipeFormErrors = {
-  name: { hasError: boolean; message: string };
-  author: { hasError: boolean; message: string };
-  time: { hasError: boolean; message: string };
-};
-
-function getDefaultGeneralRecipeErrors(): GeneralRecipeFormErrors {
-  return {
-    name: { hasError: false, message: "" },
-    author: { hasError: false, message: "" },
-    time: { hasError: false, message: "" },
-  };
-}
+import { GeneralRecipeData, GeneralRecipeFormErrors } from "../types/types";
+import WizardPage from "./WizardPage";
+import { PageProps } from "../types/types";
+import GeneralForm from "./GeneralForm";
+import { generalRecipeFormErrorsUtil } from "../util/util";
 
 type Props = PageProps & {
   generalRecipeData: GeneralRecipeData;
@@ -32,15 +20,14 @@ function GeneralPage({
     useState<GeneralRecipeData>(generalRecipeData);
 
   const [generalRecipeErrors, setGeneralRecipeErrors] = useState<GeneralRecipeFormErrors>(
-    getDefaultGeneralRecipeErrors()
+    generalRecipeFormErrorsUtil.getDefaultObject()
   );
 
   function dataIsValid(data: GeneralRecipeData): boolean {
-    const errors: GeneralRecipeFormErrors = getDefaultGeneralRecipeErrors();
+    const errors: GeneralRecipeFormErrors = generalRecipeFormErrorsUtil.getDefaultObject();
 
     if (data.name === "") {
       errors.name = { hasError: true, message: "Name is required" };
-      console.log(errors.name.message);
     }
 
     if (data.author === "") {
@@ -76,11 +63,7 @@ function GeneralPage({
 
   return (
     <>
-      <WizardPage
-        title={"General"}
-        onNextPage={onNextPage}
-        onPreviousPage={onPreviousPage}
-      >
+      <WizardPage title={"General"} onNextPage={onNextPage} onPreviousPage={onPreviousPage}>
         <GeneralForm
           generalRecipeData={generalRecipeDataLocal}
           generalRecipeErrors={generalRecipeErrors}

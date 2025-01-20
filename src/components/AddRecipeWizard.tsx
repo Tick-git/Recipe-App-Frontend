@@ -1,19 +1,16 @@
 import { grey } from "@mui/material/colors";
-import { EASY_SELECT, GeneralRecipeData } from "./GeneralForm";
+import { EASY_SELECT } from "../constants/constants";
+import { GeneralRecipeData } from "../types/types";
 import { useState } from "react";
 import { Box, Step, StepLabel, Stepper } from "@mui/material";
 import GeneralPage from "./GeneralPage";
-import IngredientPage, { Ingredient } from "./IngredientPage";
+import IngredientPage from "./IngredientPage";
+import { Ingredient } from "../types/types";
 import InstructionPage from "./InstructionPage";
-import { Instruction } from "./InstructionInput";
+import { Instruction } from "../types/types";
+import { Recipe } from "../types/types";
 
-type Recipe = {
-  generalRecipeData: GeneralRecipeData;
-  ingredients: Ingredient[];
-  instructions: Instruction[]
-};
-
-export default function AddRecipeWizard() {
+function AddRecipeWizard() {
   const [recipe, setRecipeState] = useState<Recipe>({
     generalRecipeData: {
       name: "",
@@ -22,7 +19,7 @@ export default function AddRecipeWizard() {
       difficulty: EASY_SELECT,
     },
     ingredients: [],
-    instructions: []
+    instructions: [],
   });
 
   const [currentStep, setCurrentStep] = useState<number>(0);
@@ -52,8 +49,6 @@ export default function AddRecipeWizard() {
       setCurrentStep(currentStep - 1);
     }
   }
-
-  
 
   return (
     <Box
@@ -106,3 +101,5 @@ export default function AddRecipeWizard() {
     </Box>
   );
 }
+
+export default AddRecipeWizard;

@@ -1,9 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-
-export type PageProps = {
-  onNextPage: () => void;
-  onPreviousPage?: () => void;
-};
+import { PageProps } from "../types/types";
 
 type Props = PageProps & {
   children?: React.ReactNode;
@@ -25,7 +21,7 @@ function WizardPage({ onNextPage, onPreviousPage, children, title }: Props) {
       >
         {children}
       </Box>
-      <Box justifyContent={"space-between"} display={"flex"} sx={{marginTop: "1rem"}}>
+      <Box justifyContent={"space-between"} display={"flex"} sx={{ marginTop: "1rem" }}>
         {onPreviousPage ? (
           <Button
             variant="outlined"

@@ -1,5 +1,5 @@
 import { Box, Button, TextField } from "@mui/material";
-import { Instruction } from "./InstructionInput";
+import { Instruction } from "../types/types";
 
 type Props = {
   instruction: Instruction;

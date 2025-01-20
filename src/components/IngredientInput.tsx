@@ -1,23 +1,17 @@
 import { Box, Button, TextField } from "@mui/material";
-import { Ingredient } from "./IngredientPage";
+import { Ingredient } from "../types/types";
 import { ChangeEvent, useState } from "react";
+import { GRAMM_UNIT } from "../constants/constants";
+import { ingredientUtil } from "../util/util";
 
 type Props = {
   addNewIngredient: (ingredient: Ingredient) => void;
 };
 
-const GRAMM_UNIT = "g";
-
-function defaultIngredient(): Ingredient {
-  return {
-    name: "",
-    amount: "",
-    unit: GRAMM_UNIT,
-  };
-}
-
 function IngredientInput({ addNewIngredient }: Props) {
-  const [ingredientLocal, setIngredientLocal] = useState<Ingredient>(defaultIngredient());
+  const [ingredientLocal, setIngredientLocal] = useState<Ingredient>(
+    ingredientUtil.defaultIngredient()
+  );
 
   function onInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
     const { name, value } = event.target;
@@ -25,7 +19,7 @@ function IngredientInput({ addNewIngredient }: Props) {
   }
 
   function onAddIngredientClicked(): void {
-    setIngredientLocal(defaultIngredient());
+    setIngredientLocal(ingredientUtil.defaultIngredient());
     addNewIngredient(ingredientLocal);
   }
 
@@ -56,7 +50,7 @@ function IngredientInput({ addNewIngredient }: Props) {
         name="unit"
         variant="outlined"
         size="small"
-        value={ingredientLocal.unit}    
+        value={ingredientLocal.unit}
         sx={{ flex: 1 }}
         slotProps={{
           select: {

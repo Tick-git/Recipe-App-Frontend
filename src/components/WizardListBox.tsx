@@ -5,7 +5,7 @@ type Props = {
   children?: React.ReactNode;
 };
 
-function WizardListBox({children} : Props) {
+function WizardListBox({ children }: Props) {
   return (
     <Box
       height={"100%"}

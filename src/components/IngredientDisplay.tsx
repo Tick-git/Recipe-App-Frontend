@@ -1,5 +1,5 @@
 import { Box, Button, TextField } from "@mui/material";
-import { Ingredient } from "./IngredientPage";
+import { Ingredient } from "../types/types";
 
 type Props = {
   ingredient: Ingredient;

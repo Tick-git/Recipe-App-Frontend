@@ -1,23 +1,19 @@
-import { Box, Button, TextField} from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
-
-export type Instruction = {
-    step: number;
-    text: string;
-}
+import { Instruction } from "../types/types";
 
 type Props = {
-    addNewInstruction: (instruction: Instruction) => void;
-    step: number;
-}
+  addNewInstruction: (instruction: Instruction) => void;
+  step: number;
+};
 
-function InstructionInput({addNewInstruction, step} : Props) {
-    const [instruction, setInstruction] = useState<string>("");
+function InstructionInput({ addNewInstruction, step }: Props) {
+  const [instruction, setInstruction] = useState<string>("");
 
-    function onAddNewInstructionClicked(): void {
-        setInstruction("");
-        addNewInstruction({step: step, text: instruction});
-    }
+  function onAddNewInstructionClicked(): void {
+    setInstruction("");
+    addNewInstruction({ step: step, text: instruction });
+  }
 
   return (
     <Box display={"flex"} flexDirection={"row"} gap={1}>
