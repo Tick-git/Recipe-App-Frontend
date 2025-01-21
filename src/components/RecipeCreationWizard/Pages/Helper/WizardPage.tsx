@@ -1,5 +1,5 @@
 import { Box, Button } from "@mui/material";
-import { PageProps } from "../types/types";
+import { PageProps } from "../../../../types/types";
 
 type Props = PageProps & {
   children?: React.ReactNode;

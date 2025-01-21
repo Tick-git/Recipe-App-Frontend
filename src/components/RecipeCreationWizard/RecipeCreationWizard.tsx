@@ -1,15 +1,15 @@
-import { GeneralRecipeData } from "../types/types";
+import { GeneralRecipeData } from "../../types/types";
 import { Box, Step, StepLabel, Stepper } from "@mui/material";
-import GeneralPage from "./GeneralPage";
-import IngredientPage from "./IngredientPage";
-import { Ingredient } from "../types/types";
-import InstructionPage from "./InstructionPage";
-import { Instruction } from "../types/types";
-import { Recipe } from "../types/types";
+import GeneralPage from "./Pages/GeneralPage";
+import IngredientPage from "./Pages/IngredientPage";
+import { Ingredient } from "../../types/types";
+import InstructionPage from "./Pages/InstructionPage";
+import { Instruction } from "../../types/types";
+import { Recipe } from "../../types/types";
 import { grey } from "@mui/material/colors";
-import useStepper from "../hooks/useStepper";
-import SummaryPage from "./SummaryPage";
-import useRecipe from "../hooks/useRecipe";
+import useStepper from "../../hooks/useStepper";
+import SummaryPage from "./Pages/SummaryPage";
+import useRecipe from "../../hooks/useRecipe";
 
 type Props = {
   recipe?: Recipe;

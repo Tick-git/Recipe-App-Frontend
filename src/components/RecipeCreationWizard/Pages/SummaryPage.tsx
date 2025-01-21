@@ -1,9 +1,9 @@
-import { PageProps, Recipe } from "../types/types";
-import WizardPage from "./WizardPage";
-import WizardListBox from "./WizardListBox";
-import GeneralSummary from "./GeneralSummary";
-import IngredientSummary from "./IngredientSummary";
-import InstructionSummary from "./InstructionSummary";
+import { PageProps, Recipe } from "../../../types/types";
+import WizardPage from "./Helper/WizardPage";
+import WizardListBox from "./Helper/WizardListBox";
+import GeneralSummary from "./General/GeneralSummary";
+import IngredientSummary from "./Ingredient/IngredientSummary";
+import InstructionSummary from "./Instructions/InstructionSummary";
 
 type Props = PageProps & {
   recipe: Recipe;

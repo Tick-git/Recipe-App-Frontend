@@ -1,5 +1,5 @@
 import React from "react";
-import RecipeCreationWizard from "./AddRecipeWizard";
+import RecipeCreationWizard from "./RecipeCreationWizard/RecipeCreationWizard";
 import { Container, CssBaseline } from "@mui/material";
 import useRecipe from "../hooks/useRecipe";
 import { Recipe } from "../types/types";

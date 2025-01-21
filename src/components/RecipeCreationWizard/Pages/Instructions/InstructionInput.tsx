@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import { useState } from "react";
-import { Instruction } from "../types/types";
-import WizardListElement from "./WizardListElement";
+import { Instruction } from "../../../../types/types";
+import WizardListElement from "../Helper/WizardListElement";
 
 type Props = {
   addNewInstruction: (instruction: Instruction) => void;

@@ -1,6 +1,6 @@
-import { GeneralRecipeData } from "../types/types";
-import SummaryListElement from "./SummaryListElement";
-import LabelWithValue from "./LabelWithValue";
+import { GeneralRecipeData } from "../../../../types/types";
+import SummaryListElement from "../Helper/SummaryListElement";
+import LabelWithValue from "../Helper/LabelWithValue";
 
 type Props = {
   generalRecipeData: GeneralRecipeData;

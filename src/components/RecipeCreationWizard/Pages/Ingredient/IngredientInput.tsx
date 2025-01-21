@@ -1,9 +1,9 @@
 import { TextField } from "@mui/material";
-import { Ingredient } from "../types/types";
+import { Ingredient } from "../../../../types/types";
 import { ChangeEvent, useState } from "react";
-import { GRAMM_UNIT } from "../constants/constants";
-import { ingredientUtil } from "../util/util";
-import WizardListElement from "./WizardListElement";
+import { GRAMM_UNIT } from "../../../../constants/constants";
+import { ingredientUtil } from "../../../../util/util";
+import WizardListElement from "../Helper/WizardListElement";
 
 type Props = {
   addNewIngredient: (ingredient: Ingredient) => void;

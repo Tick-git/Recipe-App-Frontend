@@ -1,8 +1,8 @@
 import { useState } from "react";
-import WizardPage from "./WizardPage";
-import { GeneralRecipeData, PageProps } from "../types/types";
-import GeneralForm from "./GeneralForm";
-import useGeneralRecipeValidation from "../hooks/useGeneralRecipeValidation";
+import WizardPage from "./Helper/WizardPage";
+import { GeneralRecipeData, PageProps } from "../../../types/types";
+import GeneralForm from "./General/GeneralForm";
+import useGeneralRecipeValidation from "../../../hooks/useGeneralRecipeValidation";
 
 type Props = PageProps & {
   generalRecipeData: GeneralRecipeData;

@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
-import { Instruction } from "../types/types";
-import WizardListElement from "./WizardListElement";
+import { Instruction } from "../../../../types/types";
+import WizardListElement from "../Helper/WizardListElement";
 
 type Props = {
   instruction: Instruction;

@@ -1,6 +1,6 @@
-import { Instruction } from "../types/types";
-import LabelWithValue from "./LabelWithValue";
-import SummaryListElement from "./SummaryListElement";
+import { Instruction } from "../../../../types/types";
+import LabelWithValue from "../Helper/LabelWithValue";
+import SummaryListElement from "../Helper/SummaryListElement";
 
 type Props = {
   instructions: Instruction[];

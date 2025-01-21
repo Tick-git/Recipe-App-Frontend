@@ -1,8 +1,8 @@
 import { Box, TextField } from "@mui/material";
 import { ChangeEvent } from "react";
-import { GeneralRecipeFormErrors } from "../types/types";
-import { GeneralRecipeData } from "../types/types";
-import { EASY_SELECT } from "../constants/constants";
+import { GeneralRecipeFormErrors } from "../../../../types/types";
+import { GeneralRecipeData } from "../../../../types/types";
+import { EASY_SELECT } from "../../../../constants/constants";
 
 type Props = {
   setGeneralRecipeData: React.Dispatch<React.SetStateAction<GeneralRecipeData>>;

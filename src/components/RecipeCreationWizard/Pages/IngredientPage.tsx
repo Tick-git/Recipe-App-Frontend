@@ -1,10 +1,10 @@
 import { useState } from "react";
-import WizardPage from "./WizardPage";
-import { PageProps } from "../types/types";
-import IngredientInput from "./IngredientInput";
-import IngredientDisplay from "./IngredientDisplay";
-import WizardListBox from "./WizardListBox";
-import { Ingredient } from "../types/types";
+import WizardPage from "./Helper/WizardPage";
+import { PageProps } from "../../../types/types";
+import IngredientInput from "./Ingredient/IngredientInput";
+import IngredientDisplay from "./Ingredient/IngredientDisplay";
+import WizardListBox from "./Helper/WizardListBox";
+import { Ingredient } from "../../../types/types";
 
 type Props = PageProps & {
   ingredients: Ingredient[];
