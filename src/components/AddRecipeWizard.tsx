@@ -1,6 +1,4 @@
-import { EASY_SELECT } from "../constants/constants";
 import { GeneralRecipeData } from "../types/types";
-import { useState } from "react";
 import { Box, Step, StepLabel, Stepper } from "@mui/material";
 import GeneralPage from "./GeneralPage";
 import IngredientPage from "./IngredientPage";
@@ -10,26 +8,19 @@ import { Instruction } from "../types/types";
 import { Recipe } from "../types/types";
 import { grey } from "@mui/material/colors";
 import useStepper from "../hooks/useStepper";
+import SummaryPage from "./SummaryPage";
+import useRecipe from "../hooks/useRecipe";
 
-function AddRecipeWizard() {
+type Props = {
+  recipe?: Recipe;
+  saveRecipe: (recipe: Recipe) => void;
+};
+
+function RecipeCreationWizard({ recipe: initialRecipe, saveRecipe }: Props) {
   const { step, nextStep, prevStep } = useStepper();
+  const { recipe, updateRecipe } = useRecipe(initialRecipe);
 
-  const [recipe, setRecipeState] = useState<Recipe>({
-    generalRecipeData: {
-      name: "",
-      author: "",
-      time: "",
-      difficulty: EASY_SELECT,
-    },
-    ingredients: [],
-    instructions: [],
-  });
-
-  const updateRecipe = (key: keyof Recipe, value: any) => {
-    setRecipeState((prev) => ({ ...prev, [key]: value }));
-  };
-
-  const pagesConfig = [
+  const wizardPageConfigs = [
     {
       label: "General",
       content: (
@@ -64,12 +55,20 @@ function AddRecipeWizard() {
             updateRecipe("instructions", instructions)
           }
           instructions={recipe.instructions}
-          onNextPage={() => console.log(recipe)}
+          onNextPage={nextStep}
           onPreviousPage={prevStep}
         />
       ),
     },
+    {
+      label: "Summary",
+      content: <SummaryPage onNextPage={onSaveRecipe} onPreviousPage={prevStep} recipe={recipe} />,
+    },
   ];
+
+  function onSaveRecipe() {
+    saveRecipe(recipe);
+  }
 
   return (
     <Box
@@ -88,15 +87,15 @@ function AddRecipeWizard() {
       }}
     >
       <Stepper sx={{ marginTop: 2 }} activeStep={step} alternativeLabel>
-        {pagesConfig.map((page, index) => (
+        {wizardPageConfigs.map((page, index) => (
           <Step key={index}>
             <StepLabel>{page.label}</StepLabel>
           </Step>
         ))}
       </Stepper>
-      {pagesConfig[step].content}
+      {wizardPageConfigs[step].content}
     </Box>
   );
 }
 
-export default AddRecipeWizard;
+export default RecipeCreationWizard;

@@ -3,9 +3,10 @@ import { PageProps } from "../types/types";
 
 type Props = PageProps & {
   children?: React.ReactNode;
+  nextButtonText?: string;
 };
 
-function WizardPage({ onNextPage, onPreviousPage, children }: Props) {
+function WizardPage({ onNextPage, onPreviousPage, children, nextButtonText = "next" }: Props) {
   return (
     <Box height="100%" display={"flex"} flexDirection={"column"}>
       <Box flexGrow={1} paddingY={"3rem"} alignContent={"center"}>
@@ -25,7 +26,7 @@ function WizardPage({ onNextPage, onPreviousPage, children }: Props) {
           <div></div>
         )}
         <Button variant="contained" onClick={onNextPage} sx={{ minWidth: "7rem" }}>
-          Next
+          {nextButtonText}
         </Button>
       </Box>
     </Box>
