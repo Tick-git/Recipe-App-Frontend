@@ -1,27 +1,17 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { PageProps } from "../types/types";
 
 type Props = PageProps & {
   children?: React.ReactNode;
-  title: string;
 };
 
-function WizardPage({ onNextPage, onPreviousPage, children, title }: Props) {
+function WizardPage({ onNextPage, onPreviousPage, children }: Props) {
   return (
-    <Box sx={{ height: "100%", width: "100%" }}>
-      <Box alignItems={"center"} height={"10%"} display={"flex"} sx={{ paddingY: "2.5rem" }}>
-        <Typography variant="h4">{title}</Typography>
-      </Box>
-      <Box
-        justifyContent={"center"}
-        flexDirection={"column"}
-        flexGrow={1}
-        display={"flex"}
-        height={"70%"}
-      >
+    <Box height="100%" display={"flex"} flexDirection={"column"}>
+      <Box flexGrow={1} paddingY={"3rem"} alignContent={"center"}>
         {children}
       </Box>
-      <Box justifyContent={"space-between"} display={"flex"} sx={{ marginTop: "1rem" }}>
+      <Box justifyContent={"space-between"} display={"flex"} flexShrink={0}>
         {onPreviousPage ? (
           <Button
             variant="outlined"

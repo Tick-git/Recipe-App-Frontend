@@ -1,4 +1,3 @@
-import { grey } from "@mui/material/colors";
 import { EASY_SELECT } from "../constants/constants";
 import { GeneralRecipeData } from "../types/types";
 import { useState } from "react";
@@ -9,8 +8,12 @@ import { Ingredient } from "../types/types";
 import InstructionPage from "./InstructionPage";
 import { Instruction } from "../types/types";
 import { Recipe } from "../types/types";
+import { grey } from "@mui/material/colors";
+import useStepper from "../hooks/useStepper";
 
 function AddRecipeWizard() {
+  const { step, nextStep, prevStep } = useStepper();
+
   const [recipe, setRecipeState] = useState<Recipe>({
     generalRecipeData: {
       name: "",
@@ -22,33 +25,51 @@ function AddRecipeWizard() {
     instructions: [],
   });
 
-  const [currentStep, setCurrentStep] = useState<number>(0);
+  const updateRecipe = (key: keyof Recipe, value: any) => {
+    setRecipeState((prev) => ({ ...prev, [key]: value }));
+  };
 
-  function changeGeneralRecipeData(data: GeneralRecipeData) {
-    setRecipeState((prev) => ({ ...prev, generalRecipeData: data }));
-  }
-
-  function changeIngredients(ingredients: Ingredient[]): void {
-    setRecipeState((prev) => ({ ...prev, ingredients: ingredients }));
-  }
-
-  function changeInstructions(instructions: Instruction[]): void {
-    setRecipeState((prev) => ({ ...prev, instructions: instructions }));
-  }
-
-  const steps = ["General", "Ingredients", "Instructions"];
-
-  function goNext(): void {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1);
-    }
-  }
-
-  function goPrevious(): void {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
-    }
-  }
+  const pagesConfig = [
+    {
+      label: "General",
+      content: (
+        <GeneralPage
+          changeGeneralRecipeData={(data: GeneralRecipeData) =>
+            updateRecipe("generalRecipeData", data)
+          }
+          generalRecipeData={recipe.generalRecipeData}
+          onNextPage={nextStep}
+          onPreviousPage={undefined}
+        />
+      ),
+    },
+    {
+      label: "Ingredients",
+      content: (
+        <IngredientPage
+          changeIngredients={(ingredients: Ingredient[]) =>
+            updateRecipe("ingredients", ingredients)
+          }
+          ingredients={recipe.ingredients}
+          onNextPage={nextStep}
+          onPreviousPage={prevStep}
+        />
+      ),
+    },
+    {
+      label: "Instructions",
+      content: (
+        <InstructionPage
+          changeInstructions={(instructions: Instruction[]) =>
+            updateRecipe("instructions", instructions)
+          }
+          instructions={recipe.instructions}
+          onNextPage={() => console.log(recipe)}
+          onPreviousPage={prevStep}
+        />
+      ),
+    },
+  ];
 
   return (
     <Box
@@ -57,47 +78,23 @@ function AddRecipeWizard() {
       boxShadow={5}
       sx={{
         height: "80vh",
-        width: "60%",
+        width: "80vh",
         backgroundColor: "white",
         borderRadius: 2,
         display: "flex",
         flexDirection: "column",
-        padding: "1.5rem",
+        overflow: "auto",
+        padding: "3rem",
       }}
     >
-      <Stepper sx={{ marginTop: 2 }} activeStep={currentStep} alternativeLabel>
-        {steps.map((label, index) => (
+      <Stepper sx={{ marginTop: 2 }} activeStep={step} alternativeLabel>
+        {pagesConfig.map((page, index) => (
           <Step key={index}>
-            <StepLabel>{label}</StepLabel>
+            <StepLabel>{page.label}</StepLabel>
           </Step>
         ))}
       </Stepper>
-      <Box display={"flex"} flexDirection={"column"} flexGrow={1} sx={{ overflowY: "auto" }}>
-        {currentStep === 0 && (
-          <GeneralPage
-            changeGeneralRecipeData={changeGeneralRecipeData}
-            generalRecipeData={recipe.generalRecipeData}
-            onNextPage={goNext}
-            onPreviousPage={undefined}
-          />
-        )}
-        {currentStep === 1 && (
-          <IngredientPage
-            changeIngredients={changeIngredients}
-            ingredients={recipe.ingredients}
-            onNextPage={goNext}
-            onPreviousPage={goPrevious}
-          ></IngredientPage>
-        )}
-        {currentStep === 2 && (
-          <InstructionPage
-            changeInstructions={changeInstructions}
-            instructions={recipe.instructions}
-            onNextPage={goNext}
-            onPreviousPage={goPrevious}
-          ></InstructionPage>
-        )}
-      </Box>
+      {pagesConfig[step].content}
     </Box>
   );
 }

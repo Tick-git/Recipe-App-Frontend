@@ -31,7 +31,7 @@ function IngredientPage({
     }
   }
 
-  function addNewIngredient(ingredient: Ingredient): void {
+  function addIngredient(ingredient: Ingredient): void {
     setIngredients((prev) => [...prev, ingredient]);
   }
 
@@ -54,9 +54,9 @@ function IngredientPage({
   }
 
   return (
-    <WizardPage title="Ingredients" onNextPage={onNextPage} onPreviousPage={onPreviousPage}>
+    <WizardPage onNextPage={onNextPage} onPreviousPage={onPreviousPage}>
       <WizardListBox>
-        <IngredientInput addNewIngredient={addNewIngredient} />
+        <IngredientInput addNewIngredient={addIngredient} />
         {RenderAddedIngredients()}
       </WizardListBox>
     </WizardPage>

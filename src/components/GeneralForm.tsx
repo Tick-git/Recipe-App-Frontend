@@ -24,13 +24,11 @@ function GeneralForm({
 
   return (
     <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 5,
-        height: "100%",
-        overflow: "visible",
-      }}
+      height={"100%"}
+      display={"flex"}
+      justifyContent={"center"}
+      flexDirection={"column"}
+      gap={6}
     >
       <TextField
         label="Recipe name"

@@ -59,7 +59,7 @@ function InstructionPage({
   }
 
   return (
-    <WizardPage title="Instructions" onNextPage={onNextPage} onPreviousPage={onPreviousPage}>
+    <WizardPage onNextPage={onNextPage} onPreviousPage={onPreviousPage}>
       <WizardListBox>
         <InstructionInput
           step={localInstructions.length + 1}

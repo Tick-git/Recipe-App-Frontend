@@ -8,12 +8,13 @@ type Props = {
 function WizardListBox({ children }: Props) {
   return (
     <Box
-      height={"100%"}
       display={"flex"}
       flexDirection={"column"}
       gap={3}
       border={1}
-      sx={{ padding: "1rem", borderColor: grey[300], overflowY: "scroll" }}
+      overflow={"scroll"}
+      height={"400px"}
+      sx={{ padding: "1rem", borderColor: grey[300] }}
     >
       {children}
     </Box>

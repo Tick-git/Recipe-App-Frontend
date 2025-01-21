@@ -36,7 +36,7 @@ function GeneralPage({
 
   return (
     <>
-      <WizardPage title={"General"} onNextPage={onNextPage} onPreviousPage={onPreviousPage}>
+      <WizardPage onNextPage={onNextPage} onPreviousPage={onPreviousPage}>
         <GeneralForm
           generalRecipeData={generalRecipeDataLocal}
           generalRecipeErrors={generalRecipeErrors}
