@@ -25,10 +25,8 @@ function RecipeCreationWizard({ recipe: initialRecipe, saveRecipe }: Props) {
       label: "General",
       content: (
         <GeneralPage
-          changeGeneralRecipeData={(data: GeneralRecipeData) =>
-            updateRecipe("generalRecipeData", data)
-          }
-          generalRecipeData={recipe.generalRecipeData}
+          changeGeneralRecipeData={(data: GeneralRecipeData) => updateRecipe("generalData", data)}
+          generalRecipeData={recipe.generalData}
           onNextPage={nextStep}
           onPreviousPage={undefined}
         />

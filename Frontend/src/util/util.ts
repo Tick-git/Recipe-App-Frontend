@@ -16,7 +16,7 @@ export const ingredientUtil = {
   defaultIngredient(): Ingredient {
     return {
       name: "",
-      amount: "",
+      quantity: "",
       unit: GRAMM_UNIT,
     };
   },

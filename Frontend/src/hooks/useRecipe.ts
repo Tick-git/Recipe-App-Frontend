@@ -11,7 +11,7 @@ function useRecipe(recipe: Recipe | undefined) {
     }
 
     return {
-      generalRecipeData: {
+      generalData: {
         name: "",
         author: "",
         time: "",

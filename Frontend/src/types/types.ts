@@ -1,5 +1,5 @@
 export type Recipe = {
-  generalRecipeData: GeneralRecipeData;
+  generalData: GeneralRecipeData;
   ingredients: Ingredient[];
   instructions: Instruction[];
 };
@@ -19,7 +19,7 @@ export type GeneralRecipeFormErrors = {
 
 export type Ingredient = {
   name: string;
-  amount: string;
+  quantity: string;
   unit: string;
 };
 

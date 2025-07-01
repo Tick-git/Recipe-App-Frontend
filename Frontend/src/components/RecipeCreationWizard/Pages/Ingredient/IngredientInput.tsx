@@ -33,12 +33,12 @@ function IngredientInput({ addNewIngredient }: Props) {
         sx={{ flex: 3 }}
       />
       <TextField
-        label="Amount"
+        label="Quantity"
         size="small"
         sx={{ flex: 2 }}
         onChange={onInputChange}
-        value={ingredientLocal.amount}
-        name="amount"
+        value={ingredientLocal.quantity}
+        name="quantity"
       />
       <TextField
         select

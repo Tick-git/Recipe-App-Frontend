@@ -11,7 +11,7 @@ function IngredientSummary({ ingredients }: Props) {
     return ingredients.map((ingredient, index) => (
       <LabelWithValue
         key={index}
-        label={`${ingredient.amount} ${ingredient.unit}`}
+        label={`${ingredient.quantity} ${ingredient.unit}`}
         value={ingredient.name}
       />
     ));

@@ -13,7 +13,7 @@ function SummaryPage({ onNextPage, onPreviousPage, recipe }: Props) {
   return (
     <WizardPage nextButtonText="Save" onNextPage={onNextPage} onPreviousPage={onPreviousPage}>
       <WizardListBox>
-        <GeneralSummary generalRecipeData={recipe.generalRecipeData} />
+        <GeneralSummary generalRecipeData={recipe.generalData} />
         <IngredientSummary ingredients={recipe.ingredients} />
         <InstructionSummary instructions={recipe.instructions} />
       </WizardListBox>
