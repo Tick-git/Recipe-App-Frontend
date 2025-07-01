@@ -10,7 +10,10 @@ function App() {
   useEffect(() => {
     fetch("https://localhost:64455/")
       .then((res) => res.json() as Promise<Recipe>)
-      .then(setRecipeState)
+      .then((data) => {
+        setRecipeState(data);
+        console.log("Recipe fetched from database: ", data);
+      })
       .catch(console.error);
   }, []);
 
