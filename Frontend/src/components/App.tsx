@@ -1,25 +1,29 @@
-import React, { useEffect } from "react";
 import RecipeCreationWizard from "./RecipeCreationWizard/RecipeCreationWizard";
 import { Container, CssBaseline } from "@mui/material";
 import useRecipe from "../hooks/useRecipe";
 import { Recipe } from "../types/types";
+import React from "react";
 
 function App() {
   const { recipe, setRecipeState } = useRecipe(undefined);
 
-  useEffect(() => {
-    fetch("https://localhost:64455/")
-      .then((res) => res.json() as Promise<Recipe>)
-      .then((data) => {
-        setRecipeState(data);
-        console.log("Recipe fetched from database: ", data);
-      })
-      .catch(console.error);
-  }, []);
-
   function saveRecipeToDatabase(recipe: Recipe) {
-    setRecipeState(recipe);
-    console.log("Recipe saved to database: ", recipe);
+    fetch("https://localhost:64455/recipes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(recipe),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json() as Promise<Recipe>;
+      })
+      .then((saved) => {
+        setRecipeState(saved);
+        console.log("Recipe saved to database: ", saved);
+      })
+      .catch((err) => {
+        console.error("Failed to save recipe:", err);
+      });
   }
 
   return (
